@@ -13,7 +13,7 @@ end
 local function move()
 	local input
 	repeat
-		input = getmove()
+		input = getmove(board)
 	until(check(input.start, input.finish))
 	board[input.finish.x][input.finish.y] = board[input.start.x][input.start.y]
 	board[input.start.x][input.start.y] = 1

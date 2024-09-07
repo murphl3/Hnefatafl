@@ -1,14 +1,15 @@
 -- getmove.lua
-local function getmove()
+local function getmove(board)
 	io.write("Please enter your move: ")
+	local a, b, c, d = io.read("*n"), io.read("*n"), io.read("*n"), io.read("*n")
 	return {
 		start = {
-			x = io.read("*n"),
-			y = io.read("*n")
+			x = board.height + 1 - b,
+			y = a
 		},
 		finish = {
-			x = io.read("*n"),
-			y = io.read("*n")
+			x = board.height + 1 - d,
+			y = c
 		}
 	}
 end
