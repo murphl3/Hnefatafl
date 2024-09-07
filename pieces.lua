@@ -2,7 +2,7 @@
 local pieces = {
 	{
 		char = "-",
-		player = nan
+		player = 2
 	},
 	{
 		char = "A",
