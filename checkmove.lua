@@ -6,10 +6,10 @@ local function checkmove(board, pieces, player, start, finish)
 	if start.x > board.width or start.y > board.height or finish.x > board.width or finish.y > board.height then
 		return false
 	end
-	if not player == pieces[board[start.x][start.y]].player then
+	if not (player == pieces[board[start.x][start.y]].player) then
 		return false
 	end
-	if not start.x == finish.x and not start.y == finish.y then
+	if not (start.x == finish.x or start.y == finish.y) then
 		return false
 	end
 	return true	
