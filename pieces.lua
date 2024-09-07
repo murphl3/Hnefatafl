@@ -1,19 +1,19 @@
 -- pieces.lua
 local pieces = {
 	{
-		char = "- ",
+		char = "-",
 		player = nan
 	},
 	{
-		char = "A ",
+		char = "A",
 		player = 0
 	},
 	{
-		char = "D ",
+		char = "D",
 		player = 1
 	},
 	{
-		char = "K ",
+		char = "K",
 		player = 1
 	}
 }
