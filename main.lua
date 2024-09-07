@@ -11,8 +11,9 @@ local function check(start, finish) -- Run checkmove with just the move values a
 end
 
 local function move()
+	local input
 	repeat
-		local input = getmove()
+		input = getmove()
 	until(check(input.start, input.finish))
 	board[input.finish.x][input.finish.y] = board[input.start.x][input.start.y]
 	board[input.start.x][input.start.y] = 1
@@ -20,4 +21,5 @@ local function move()
 end
 
 printboard(board, pieces)
-check({x = 1, y = 1}, {x = 1, y = 1})
+move()
+printboard(board, pieces)
