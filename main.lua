@@ -33,7 +33,7 @@ local function checkstate(state)
 	neighbors = getneighbors(state, board)
 	for i=1,#neighbors,1 do
 		if pieces[board[neighbors[i].x][neighbors[i].y]].player == player then
-			if checkcapture(neighbors[i], state, board. pieces) then
+			if checkcapture(neighbors[i], state, board, pieces, player) then
 				if board[neighbors[i].x][neighbors[i].y] == 2 then
 					board.attackers = board.attackers - 1
 				elseif board[neighbors[i].x][neighbors[i].y] == 3 then

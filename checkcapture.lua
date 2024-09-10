@@ -1,5 +1,6 @@
 -- checkcapture.lua
-local function checkcapture(pos, moved)
-	return true
+local getneighbors = require("getneighbors")
+local function checkcapture(pos, moved, board, pieces, player)
+  return false
 end
 return checkcapture
