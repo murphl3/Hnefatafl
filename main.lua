@@ -15,7 +15,7 @@ end
 local function move()
 	local input
 	repeat
-		input = getmove(board)
+		input = getmove(board, player)
 	until(check(input.start, input.finish))
 	board[input.finish.x][input.finish.y] = board[input.start.x][input.start.y]
 	board[input.start.x][input.start.y] = empty[input.start.x][input.start.y]
