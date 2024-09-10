@@ -42,6 +42,9 @@ local function checkmove(board, pieces, player, start, finish)
 			return false
 		end
 	end
+	if (not (board[start.x][start.y] == 4)) and (board[finish.x][finish.y] == 5) then
+		return false
+	end
 	return true	
 end
 return checkmove

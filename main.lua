@@ -46,6 +46,9 @@ local function checkcapture(pos, moved)
 end
 
 local function checkstate(state)
+	if ((state.x == 1) or (state.x == board.width)) and ((state.y == 1) or (state.y == board.height)) then
+		winner = 1
+	end
 	neighbors = getneighbors(state)
 	for i=1,#neighbors,1 do
 		if pieces[board[neighbors[i].x][neighbors[i].y]].player == player then
@@ -81,7 +84,8 @@ repeat
 	local update = move()
 	checkstate(update.finish)
 	if winner > -1 then
-		print("\n   Player "..(winner + 1).." Wins!")
+		printboard(board, pieces)
+		print("   Player "..(winner + 1).." Wins!")
 		playing = false
 	end
 until(not playing)
