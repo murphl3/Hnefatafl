@@ -5,6 +5,7 @@ local checkmove = require("checkmove") -- Check if a move is valid based on seve
 local getmove = require("getmove") -- Get user input and output the move state
 local printboard = require("printboard") -- Print the current board state
 local empty = require("empty")
+local getneighbors = require("getneighbors")
 local playing = true
 local player = 0
 local winner = -1
@@ -24,23 +25,6 @@ local function move()
 	return input
 end
 
-local function getneighbors(pos)
-	local neighbors = {}
-	if pos.x < board.width then
-		table.insert(neighbors, {x = pos.x + 1, y = pos.y})
-	end
-	if pos.x > 1 then
-		table.insert(neighbors, {x = pos.x - 1, y = pos.y})
-	end
-	if pos.y < board.height then
-		table.insert(neighbors, {x = pos.x, y = pos.y + 1})
-	end
-	if pos.y > 1 then
-		table.insert(neighbors, {x = pos.x, y = pos.y - 1})
-	end
-	return neighbors
-end
-
 local function checkcapture(pos, moved)
 	return true
 end
@@ -49,7 +33,7 @@ local function checkstate(state)
 	if ((state.x == 1) or (state.x == board.width)) and ((state.y == 1) or (state.y == board.height)) then
 		winner = 1
 	end
-	neighbors = getneighbors(state)
+	neighbors = getneighbors(state, board)
 	for i=1,#neighbors,1 do
 		if pieces[board[neighbors[i].x][neighbors[i].y]].player == player then
 			if checkcapture(neighbors[i], state) then
