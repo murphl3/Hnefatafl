@@ -60,6 +60,9 @@ local function checkstate(state)
 				else
 					winner = 0
 				end
+				if board.attackers == 0 then
+					winner = 1
+				end
 				board[neighbors[i].x][neighbors[i].y] = empty[neighbors[i].x][neighbors[i].y]
 			end
 		end
@@ -78,6 +81,9 @@ print("6. The king is the only piece which may occupy the corners or center of")
 print("   the board.")
 print("7. To win, either the king must make it to a corner, or the King must be")
 print("   captured.")
+print("\nMoves are made, with the bottom left as the origin, as follows:\n\n   [x1, y1, x2, y2]\n")
+print("There are more complex versions of the game out there, but this")
+print("simplified version is the one that this program follows")
 
 repeat
 	printboard(board, pieces)
