@@ -63,7 +63,7 @@ print("   the board.")
 print("7. To win, either the King must make it to a corner, or the King must be")
 print("   captured.")
 print("8. The attacker always goes first.")
-print("\nMoves are made, with the bottom left as the origin, as follows:\n\n   [x1, y1, x2, y2]\n")
+print("\nMoves are made, with the bottom left as the origin, as follows:\n\n   x1 y1 x2 y2\n")
 print("There are more complex versions of the game out there, but this")
 print("simplified version is the one that this program follows")
 
