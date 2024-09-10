@@ -7,6 +7,7 @@ local printboard = require("printboard") -- Print the current board state
 local empty = require("empty")
 local playing = true
 local player = 0
+local winner = -1
 
 local function check(start, finish) -- Run checkmove with just the move values as arguments
 	return checkmove(board, pieces, player, start, finish)
@@ -20,14 +21,67 @@ local function move()
 	board[input.finish.x][input.finish.y] = board[input.start.x][input.start.y]
 	board[input.start.x][input.start.y] = empty[input.start.x][input.start.y]
 	player = (player + 1) % 2
+	return input
+end
+
+local function getneighbors(pos)
+	local neighbors = {}
+	if pos.x < board.width then
+		table.insert(neighbors, {x = pos.x + 1, y = pos.y})
+	end
+	if pos.x > 1 then
+		table.insert(neighbors, {x = pos.x - 1, y = pos.y})
+	end
+	if pos.y < board.height then
+		table.insert(neighbors, {x = pos.x, y = pos.y + 1})
+	end
+	if pos.y > 1 then
+		table.insert(neighbors, {x = pos.x, y = pos.y - 1})
+	end
+	return neighbors
+end
+
+local function checkcapture(pos, moved)
+	return true
 end
 
 local function checkstate(state)
-	-- TODO
+	neighbors = getneighbors(state)
+	for i=1,#neighbors,1 do
+		if pieces[board[neighbors[i].x][neighbors[i].y]].player == player then
+			if checkcapture(neighbors[i], state) then
+				if board[neighbors[i].x][neighbors[i].y] == 2 then
+					board.attackers = board.attackers - 1
+				elseif board[neighbors[i].x][neighbors[i].y] == 3 then
+					board.defenders = board.defenders - 1
+				else
+					winner = 0
+				end
+				board[neighbors[i].x][neighbors[i].y] = empty[neighbors[i].x][neighbors[i].y]
+			end
+		end
+	end
 end
+
+print("Rules:")
+print("1. Every Piece moves like a rook in chess.")
+print("2. No piece may pass over or land on another piece.")
+print("3. To capture a piece, it must be surrounded on two opposing sides")
+print("   by the opponent's pieces, the corners, the center, and/or edges.")
+print("4. A piece is only captured when the opposing  player moves their piece")
+print("   to capture it, not if it comes to rest in a given position.")
+print("5. The defending King needs to be surrounded on all sides to be taken.")
+print("6. The king is the only piece which may occupy the corners or center of")
+print("   the board.")
+print("7. To win, either the king must make it to a corner, or the King must be")
+print("   captured.")
 
 repeat
 	printboard(board, pieces)
 	local update = move()
-	checkstate(state)
+	checkstate(update.finish)
+	if winner > -1 then
+		print("\n   Player "..(winner + 1).." Wins!")
+		playing = false
+	end
 until(not playing)

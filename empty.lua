@@ -12,6 +12,8 @@ local empty = {
 	{1,1,1,1,1,1,1,1,1,1,1},
 	{5,1,1,1,1,1,1,1,1,1,5},
 	width = 11,
-	height = 11
+	height = 11,
+	attackers = 0,
+	defenders = 0,
 }
 return empty
