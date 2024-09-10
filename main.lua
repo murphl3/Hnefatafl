@@ -6,6 +6,7 @@ local getmove = require("getmove") -- Get user input and output the move state
 local printboard = require("printboard") -- Print the current board state
 local empty = require("empty")
 local getneighbors = require("getneighbors")
+local checkcapture = require("checkcapture")
 local playing = true
 local player = 0
 local winner = -1
@@ -25,10 +26,6 @@ local function move()
 	return input
 end
 
-local function checkcapture(pos, moved)
-	return true
-end
-
 local function checkstate(state)
 	if ((state.x == 1) or (state.x == board.width)) and ((state.y == 1) or (state.y == board.height)) then
 		winner = 1
@@ -36,7 +33,7 @@ local function checkstate(state)
 	neighbors = getneighbors(state, board)
 	for i=1,#neighbors,1 do
 		if pieces[board[neighbors[i].x][neighbors[i].y]].player == player then
-			if checkcapture(neighbors[i], state) then
+			if checkcapture(neighbors[i], state, board. pieces) then
 				if board[neighbors[i].x][neighbors[i].y] == 2 then
 					board.attackers = board.attackers - 1
 				elseif board[neighbors[i].x][neighbors[i].y] == 3 then
