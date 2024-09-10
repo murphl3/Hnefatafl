@@ -12,6 +12,36 @@ local function checkmove(board, pieces, player, start, finish)
 	if not (start.x == finish.x or start.y == finish.y) then
 		return false
 	end
+	local path = {}
+	local fixed = 0
+	if start.x < finish.x then
+		fixed = start.y
+		for tmp=start.x + 1, finish.x,1 do
+			table.insert(path, {x = tmp, y = fixed})
+		end
+	elseif start.x > finish.x then
+		fixed = start.y
+		for tmp=start.x - 1, finish.x,-1 do
+			table.insert(path, {x = tmp, y = fixed})
+		end
+	elseif start.y < finish.y then
+		fixed = start.x
+		for tmp=start.y + 1, finish.y,1 do
+			table.insert(path, {x = fixed, y = tmp})
+		end
+	elseif start.y > finish.y then
+		fixed = start.x
+		for tmp=start.y - 1, finish.y,-1 do
+			table.insert(path, {x = fixed, y = tmp})
+		end
+	else
+		return false
+	end
+	for ptr=1,#path,1 do
+		if not (pieces[board[path[ptr].x][path[ptr].y]].player == 2) then
+			return false
+		end
+	end
 	return true	
 end
 return checkmove

@@ -15,6 +15,10 @@ local pieces = {
 	{
 		char = "K",
 		player = 1
+	},
+	{
+		char = "+",
+		player = 2
 	}
 }
 return pieces

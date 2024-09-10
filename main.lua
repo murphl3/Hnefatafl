@@ -4,6 +4,7 @@ local pieces = require("pieces") -- List of piece metadata by id
 local checkmove = require("checkmove") -- Check if a move is valid based on several factors
 local getmove = require("getmove") -- Get user input and output the move state
 local printboard = require("printboard") -- Print the current board state
+local empty = require("empty")
 local playing = true
 local player = 0
 
@@ -17,7 +18,7 @@ local function move()
 		input = getmove(board)
 	until(check(input.start, input.finish))
 	board[input.finish.x][input.finish.y] = board[input.start.x][input.start.y]
-	board[input.start.x][input.start.y] = 1
+	board[input.start.x][input.start.y] = empty[input.start.x][input.start.y]
 	player = (player + 1) % 2
 end
 
