@@ -4,6 +4,7 @@ The rules are explained upon starting the game, but the input scheme might not b
 The coordinates (1, 1) are the bottom left corner, and each row and column goes up to eleven.
 Here are a few simple examples of inputs:
 
+```
 Initial State:
 +-------+
 | - - - |
@@ -28,3 +29,4 @@ Input: 3 2 2 3
 | - - - |
 | - - - |
 +-------+
+```
